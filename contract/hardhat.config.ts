@@ -21,6 +21,8 @@ const config: HardhatUserConfig = {
       accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
   },
 
+  
+
   },
   
   etherscan: {
