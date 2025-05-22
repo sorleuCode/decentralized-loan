@@ -58,6 +58,7 @@ contract LoanManager is ILoanManager, LoanStorage, ReentrancyGuard, Pausable {
         require(msg.value >= requiredCollateral, "Insufficient collateral");
 
         loanCounter++;
+        
 
         LoanRequest storage request = loanRequests[loanCounter];
         request.amount = amount;
