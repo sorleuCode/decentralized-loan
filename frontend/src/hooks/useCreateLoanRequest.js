@@ -26,8 +26,8 @@ const useCreateLoanRequest = () => {
         return;
       }
 
-      if (Number(chainId) !== 50002) {
-        toast.error("You're not connected to baseSepolia");
+      if (Number(chainId) !== 44787) {
+        toast.error("You're not connected to celo alfajores");
         return;
       }
 
