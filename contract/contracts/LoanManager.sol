@@ -60,6 +60,7 @@ contract LoanManager is ILoanManager, LoanStorage, ReentrancyGuard, Pausable {
         loanCounter++;
         
 
+
         LoanRequest storage request = loanRequests[loanCounter];
         request.amount = amount;
         request.maxInterestRate = maxInterestRate;
