@@ -20,7 +20,7 @@ const celoAlfajores = defineChain({
   },
   rpcUrls: {
     default: {
-      http: [ "https://alfajores-forno.celo-testnet.org"],
+      http: [import.meta.env.VITE_ALFAJORES_RPC_URL],
     },
   },
   blockExplorers: {

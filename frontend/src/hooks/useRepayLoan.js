@@ -4,14 +4,14 @@ import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { ErrorDecoder } from "ethers-decode-error";
 import { Contract, ethers, parseUnits } from "ethers";
-// import usdtTokenABI from "../ABI/usdtToken.json";
+import usdtTokenABI from "../ABI/usdtToken.json";
 import useSignerOrProvider from "./useSignerOrProvider";
 
 const useRepayLoan = () => {
   const contract = useContractInstance(true);
   const { address } = useAppKitAccount();
   const { chainId } = useAppKitNetwork();
-  const usdtTokenContractAddress = import.meta.env.VITE_USDT_TOKEN_CONTRACT_ADDRESS;
+  const usdtTokenContractAddress = import.meta.env.VITE_CUSD_CONTRACT_ADDRESS;
   const lumenVaultContractAddress = import.meta.env.VITE_LUMEN_VAULT_CONTRACT_ADDRESS;
 
   const { signer } = useSignerOrProvider();
@@ -35,8 +35,8 @@ const useRepayLoan = () => {
         return;
       }
 
-      if (Number(chainId) !== 50002) {
-        toast.error("Please connect to Base Sepolia");
+      if (Number(chainId) !== 44787) {
+        toast.error("You're not connected to celo alfajores");
         return;
       }
 
@@ -62,6 +62,8 @@ const useRepayLoan = () => {
           return;
         }
 
+
+        console.log({repaymenInNum, bigIntRepayment, repayment})
       
         // Approve mUSDT transfer
         let estimatedGas;
