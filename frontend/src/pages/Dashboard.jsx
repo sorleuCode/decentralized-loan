@@ -6,7 +6,6 @@ import useGetLoanTotalRepayment from "../hooks/useGetLoanTotalRepayment";
 import { useCollateralCalculator } from "../hooks/useCollateralCalculator";
 import useWithdrawRewards from "../hooks/useWithdrawRewards";
 import useGetOwnerAddress from "../hooks/useGetOwnerAddress";
-// import useClaimMockUsdt from "../hooks/useClaimMockUsdt";
 import { toast } from "react-toastify";
 import useGetContractLinkBalance from "../hooks/useGetContractLinkBalance";
 
@@ -24,9 +23,7 @@ const DashboardContent = () => {
   const [ownerAddress, setOwnerAddress] = useState(null);
   const [contractBalance, setContractBalance] = useState("0");
   const [isWithdrawing, setIsWithdrawing] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isClaiming, setIsClaiming] = useState(false);
-
+ 
   const { address } = useAppKitAccount();
   const getAllLoanRequests = useGetLoanTotalRepayment();
   const fetchRequiredCollateral = useCollateralCalculator();
@@ -34,7 +31,6 @@ const DashboardContent = () => {
   const withdrawalHandler = useWithdrawRewards();
   const getOwnerAddress = useGetOwnerAddress();
   const getContractBalance = useGetContractLinkBalance();
-  const claimMockUsdt = useClaimMockUsdt();
 
   const fetchLoanPaymentDetails = useCallback(async (loanId) => {
     try {
@@ -121,21 +117,7 @@ const DashboardContent = () => {
     }
   }, [withdrawAddress, withdrawalHandler]);
 
-  const handleClaim = useCallback(async () => {
-    setIsClaiming(true);
-    try {
-      const result = await claimMockUsdt();
-      if (result) {
-        setIsModalOpen(false);
-      }
-    } catch (error) {
-      console.error("Claim Error:", error);
-      toast.error("Claim failed. Please try again.");
-    } finally {
-      setIsClaiming(false);
-    }
-  }, [claimMockUsdt]);
-
+ 
   return (
     <div className="p-4 sm:p-6 space-y-6 sm:space-y-8 bg-black min-h-screen flex flex-col justify-center md:block">
       {/* Welcome Message */}
@@ -146,62 +128,7 @@ const DashboardContent = () => {
           Welcome, {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "user"}
         </div>
 
-        <div>
-                {/* Claim Faucet Button (Non-Owner Only) */}
-
-          {!isOwner && (
-            <div className="w-full max-w-xs sm:max-w-sm">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="w-full px-4 py-2 text-sm sm:text-base bg-blue-400 text-white rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Claim cUSD Faucet
-              </button>
-            </div>
-          )}
-        </div>
       </div>
-
-
-
-      {/* Modal for Token Information and Claim */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-900 rounded-xl p-4 sm:p-6 w-full max-w-[90%] sm:max-w-md relative">
-            {/* Close Button */}
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-100"
-            >
-              <X className="h-5 w-5 sm:h-6 sm:w-6" />
-            </button>
-
-            {/* Modal Content */}
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-100 mb-3 sm:mb-4">Claim cUSD Tokens</h3>
-            <div className="space-y-3 text-gray-300 text-sm sm:text-base">
-              <p><strong>Token Symbol:</strong> cUSD</p>
-              <p className="break-all"><strong>Contract Address:</strong> 0x4139F0ccD676061C6D78Fb2D20eC192096957dcf</p>
-              <p><strong>Decimals:</strong> 18</p>
-            </div>
-
-            {/* Claim Button with Loading State */}
-            <button
-              onClick={handleClaim}
-              disabled={isClaiming}
-              className="mt-4 sm:mt-6 w-full px-4 py-2 text-sm sm:text-base bg-blue-400 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:bg-blue-400 flex items-center justify-center"
-            >
-              {isClaiming ? (
-                <div className="flex items-center">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Claiming...
-                </div>
-              ) : (
-                "Claim Tokens"
-              )}
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Withdraw Section (Only for Owner) */}
       {isOwner && (

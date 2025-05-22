@@ -20,7 +20,7 @@ const celoAlfajores = defineChain({
   },
   rpcUrls: {
     default: {
-      http: [import.meta.env.VITE_ALFAJORES_RPC_URL || "https://alfajores-forno.celo-testnet.org"],
+      http: [import.meta.env.VITE_ALFAJORES_RPC_URL],
     },
   },
   blockExplorers: {
@@ -29,16 +29,7 @@ const celoAlfajores = defineChain({
       url: "https://alfajores.celoscan.io",
     },
   },
-  contracts: {
-    cUSD: {
-      address: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
-      abi: [], // Add cUSD ABI if needed
-    },
-    lumenVault: {
-      address: import.meta.env.VITE_LUMEN_VAULT_CONTRACT_ADDRESS,
-      abi: [], // Add LumenVault contract ABI if needed
-    },
-  },
+  
 });
 
 // Set the networks
@@ -48,7 +39,7 @@ const networks = [celoAlfajores];
 const metadata = {
   name: "Lumenvault",
   description: "Decentralized micro-loan",
-  url: "https://lumenvault.vercel.app",
+  url: "http://localhost:5173",
   icons: ["https://avatars.mywebsite.com/"],
 };
 

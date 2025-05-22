@@ -3,7 +3,7 @@ import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { ErrorDecoder } from "ethers-decode-error";
 import { Contract, formatUnits } from "ethers";
-// import usdtTokenABI from "../ABI/usdtToken.json"
+import usdtTokenABI from "../ABI/usdtToken.json"
 import useSignerOrProvider from "./useSignerOrProvider";
 
 
@@ -11,7 +11,7 @@ const useGetContractLinkBalance = () => {
   const { address } = useAppKitAccount();
   const { chainId } = useAppKitNetwork();
   const { readOnlyProvider } = useSignerOrProvider()
-  const usdtTokenContractAddress = import.meta.env.VITE_USDT_TOKEN_CONTRACT_ADDRESS;
+  const usdtTokenContractAddress = import.meta.env.VITE_CUSD_CONTRACT_ADDRESS;
   const lumenVaultContractAddress = import.meta.env.VITE_LUMEN_VAULT_CONTRACT_ADDRESS;
 
   const usdtTokenContract = new Contract(usdtTokenContractAddress, usdtTokenABI, readOnlyProvider);

@@ -15,6 +15,7 @@ library CollateralUtils {
         uint256 decimals
     ) internal pure returns (uint256) {
         
-        return (loanAmount * price * collateralizationRatio) / (100 * 10 ** decimals);
+        return  (loanAmount * collateralizationRatio * (10 ** decimals)) / (price * 100);
+
     }
 }

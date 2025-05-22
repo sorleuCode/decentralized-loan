@@ -4,7 +4,7 @@ import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { ErrorDecoder } from "ethers-decode-error";
 import { Contract, ethers } from "ethers"; // Remove BigNumber import
-// import usdtTokenABI from "../ABI/usdtToken.json";
+import usdtTokenABI from "../ABI/usdtToken.json";
 import useSignerOrProvider from "./useSignerOrProvider";
 
 const useFundLoan = () => {
@@ -13,7 +13,7 @@ const useFundLoan = () => {
   const { chainId } = useAppKitNetwork();
   const { signer } = useSignerOrProvider();
 
-  const usdtTokenContractAddress = import.meta.env.VITE_USDT_TOKEN_CONTRACT_ADDRESS;
+  const usdtTokenContractAddress = import.meta.env.VITE_CUSD_CONTRACT_ADDRESS;
   const lumenVaultContractAddress = import.meta.env.VITE_LUMEN_VAULT_CONTRACT_ADDRESS;
 
   const usdtContract = new Contract(usdtTokenContractAddress, usdtTokenABI, signer);

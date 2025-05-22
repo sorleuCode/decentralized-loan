@@ -26,6 +26,8 @@ const useGetOwnerAddress = () => {
 
         if (ownerAddress) {
 
+          console.log({ownerAddress})
+
           return ownerAddress;
         }
 
