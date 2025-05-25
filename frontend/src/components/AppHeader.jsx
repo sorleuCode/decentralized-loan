@@ -66,6 +66,7 @@ const AppHeader = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-[#808080]">
       <nav className="container mx-auto px-3 sm:px-4">
         <div className="h-16 flex items-center justify-between">
+          
           {/* Logo */}
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center space-x-4">
