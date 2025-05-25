@@ -451,7 +451,7 @@ const Documentation = () => {
                     </li>
                     <li>
                       <b>Liquidate Overdue Loans:</b> In case of overdue loans,
-                      the platform will automatically liquidate the borrower's
+                      the platform will liquidate the borrower's
                       collateral to protect your funds. You can view the status
                       of liquidated loans and the collateral recovered.
                     </li>

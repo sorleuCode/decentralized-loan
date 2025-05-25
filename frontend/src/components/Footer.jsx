@@ -27,12 +27,7 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="flex items-center space-x-2 mb-4">
-              {/* <div className="bg-gradient-to-r from-blue-600 to-blue-300 p-2 rounded-lg">
-                <Hexagon className="h-6 w-6 text-black" />
-              </div> */}
-              {/* <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-300">
-                LENDLINK
-              </span> */}
+             
                <img
               src={logo}
               alt="LumenVault Logo"
