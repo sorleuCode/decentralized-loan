@@ -57,7 +57,6 @@ Borrowers can access micro-loans seamlessly, while lenders earn interest in a tr
 - *Blockchain*: Celo Alfajores Testnet
 - *Smart Contracts*: Solidity
 - *Frontend*: React.js
-- *Database*: IPFS.
 
 ---
 
