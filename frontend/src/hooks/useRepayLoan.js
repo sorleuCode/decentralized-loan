@@ -41,6 +41,8 @@ const useRepayLoan = () => {
       }
 
 
+
+      
       
       console.log("Repaying loan with params:", {
         loanId: loanId.toString(),
@@ -56,31 +58,33 @@ const useRepayLoan = () => {
       try {
         const repaymenInNum = Number(repayment);
 
-        const bigIntRepayment = parseUnits((repaymenInNum * 2).toString(), 18)
+        const bigIntRepayment = parseUnits(((repaymenInNum * 2).toFixed(0)).toString(), 18)
         if (repaymenInNum <= 0) {
           toast.error("Repayment amount must be greater than 0");
           return;
         }
 
+        
+        const balance = await usdtContract.balanceOf(address);
 
-        console.log({repaymenInNum, bigIntRepayment, repayment})
-      
-        // Approve mUSDT transfer
-        let estimatedGas;
-        try {
-          estimatedGas = await usdtContract.approve.estimateGas(
-            lumenVaultContractAddress,
-            bigIntRepayment
-          );
-        } catch (estimateErr) {
-          console.warn("Gas estimation for approve failed:", estimateErr);
-          toast.error("Failed to estimate gas for approval");
+       
+
+        if (balance < bigIntRepayment) {
+          toast.error("Insufficient token balance");
           return;
         }
 
+        console.log({repaymenInNum, bigIntRepayment, repayment})
+      
+     
+         const estimatedGas = await usdtContract.approve.estimateGas(
+            lumenVaultContractAddress,
+            bigIntRepayment
+          );
+    
+
         const approveTx = await usdtContract.approve(lumenVaultContractAddress, bigIntRepayment, {
           gasLimit: (estimatedGas * BigInt(120)) / BigInt(100),
-          gasPrice: ethers.parseUnits("1", "gwei"), // Fallback
         });
 
         console.log("Approval transaction sent:", { txHash: approveTx.hash });
@@ -104,7 +108,6 @@ const useRepayLoan = () => {
 
         const repayTx = await contract.repayLoanWithReward(loanId, {
           gasLimit: (estimatedGasLoan * BigInt(120)) / BigInt(100),
-          gasPrice: ethers.parseUnits("1", "gwei"), // Fallback
         });
 
         console.log("Repayment transaction sent:", { txHash: repayTx.hash });
